@@ -18,8 +18,8 @@ Command to run the program is as follows:
 ```
 python main.py [-cfg CONFIG] [-o [ORDER]] [-t [THRESHOLD]]
 ```
--cfg: required configuration file for the FIX server, and is stored under the config directory
--o: number of random orders to send to the FIX server, default value of 10
+-cfg: required configuration file for the FIX server, and is stored under the config directory \
+-o: number of random orders to send to the FIX server, default value of 10 \
 -t: threshold to determine send order frequencies, value between 0.0 and 1.0, with a higher value indicating higher likelihood of buy orders being sent compared to cancel orders
 
 ## 4. Mini-Project
