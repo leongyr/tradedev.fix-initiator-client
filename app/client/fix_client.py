@@ -137,10 +137,7 @@ class FixClient(fix.Application):
 		'''
 		Send Buy orders to the FIX server in the form of a FIX message
 		
-		Parameters
-		===========
-		order_req: Order
-			Order with the required information to send a valid Buy order to FIX server
+		:param order_req: Order
 		'''
 		_ticker = order_req.ticker
 		_side = order_req.side
@@ -177,10 +174,7 @@ class FixClient(fix.Application):
 		'''
 		Send Cancel orders to the FIX server in the form of a FIX message
 		
-		Parameters
-		===========
-		fix_repr: dict
-			Dictionary with the required tags for sending a Cancel order to FIX server
+		:param fix_repr: dict
 		'''
 		order_msg = self._newMsg()
 		order_msg.getHeader().setField(fix.MsgType(fix.MsgType_OrderCancelRequest))
@@ -201,11 +195,7 @@ class FixClient(fix.Application):
 		Registers the necessary callbacks to add, remove and update ledgers
 		within the trading book
 
-		Parameters
-		===========
-		methods: dict
-			Contains the necessary callback functions for the client upon receiving order
-			updates from the FIX server
+		:param methods: dict{label: method}
 		"""
 		if isinstance(methods, dict):
 			try:

@@ -7,6 +7,8 @@ from app.common.interface_order import (Order)
 def unicode_fix(string: str) -> str: 
    """
    Replace FIX unicode characters with '|'
+
+   :param string: str
    """ 
    bar_in_unicode = "\x01" 
    new_str = string.replace(bar_in_unicode, '|') 
@@ -16,6 +18,8 @@ def unicode_fix(string: str) -> str:
 def gen_synthetic_orders(tickers: list[str]) -> dict:
    """
    Generate random orders for sending to server
+
+   :param tickers: list[str]
    """
    sides = [fix.Side_BUY, fix.Side_SELL, fix.Side_SELL_SHORT]
    order_types = [fix.OrdType_LIMIT, fix.OrdType_MARKET]
@@ -42,6 +46,8 @@ def extract_tag_value_pair_from(msg: str) -> dict:
    """
    Extract tag-value pairs from string representation 
    of fix messages
+
+   :param msg: str
    """
    tag_dict = {}
    tag_value_pairs = msg.split("|")[:-1]

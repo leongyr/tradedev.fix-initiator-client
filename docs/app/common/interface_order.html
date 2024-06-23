@@ -42,36 +42,8 @@ hljs.highlightAll();
 <dd>
 <div class="desc"><p>Ledger to hold all pending orders and confirmed trades for
 a particular asset</p>
-<h1 id="parameters">Parameters</h1>
-<p>name: str
-Asset to which the ledger applies</p>
-<h1 id="methods">Methods</h1>
-<p>add_order (self, Order)
-Add new orders
-remove_order (self, Order)
-Remove existing orders
-update_order (self, OrderUpdateEvent)
-Update existing orders with new order updates from server
-clear_orders (self)
-Clear all orders in the ledger
-get_order (self, Order.id)
-Retrieve respective order based on the id
-Retrieve all orders if Order.id is None
-add_trade (self, Trade)
-Add new trades
-remove_trade (self, Trade)
-Remove existing trades
-clear_trades (self)
-Clear all trades in the ledger
-get_trade (self, Trade.id)
-Retrieve respective trade based on the id
-Retrieve all trades if Order.id is None
-calc_asset_trading_volume (self)
-Calculate total trading volume for the ledger in dollar amount
-calc_trading_pnl (self)
-Calculate total trading PnL for the ledger in dollar amount
-calc_vwap (self)
-Calculate VWAP for the ledger in dollar amount</p></div>
+<p>Attributes<br>
+name: str - Asset to which the ledger applies</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -81,39 +53,8 @@ Calculate VWAP for the ledger in dollar amount</p></div>
         Ledger to hold all pending orders and confirmed trades for 
         a particular asset
 
-        Parameters
-        ==========
-        name: str
-                Asset to which the ledger applies
-
-        Methods
-        ==========
-        add_order (self, Order)
-                Add new orders
-        remove_order (self, Order)
-                Remove existing orders
-        update_order (self, OrderUpdateEvent)
-                Update existing orders with new order updates from server
-        clear_orders (self)
-                Clear all orders in the ledger
-        get_order (self, Order.id)
-                Retrieve respective order based on the id
-                Retrieve all orders if Order.id is None
-        add_trade (self, Trade)
-                Add new trades
-        remove_trade (self, Trade)
-                Remove existing trades
-        clear_trades (self)
-                Clear all trades in the ledger
-        get_trade (self, Trade.id)
-                Retrieve respective trade based on the id
-                Retrieve all trades if Order.id is None
-        calc_asset_trading_volume (self)
-                Calculate total trading volume for the ledger in dollar amount
-        calc_trading_pnl (self)
-                Calculate total trading PnL for the ledger in dollar amount
-        calc_vwap (self)
-                Calculate VWAP for the ledger in dollar amount
+        Attributes  
+        name: str - Asset to which the ledger applies
         &#34;&#34;&#34;
         def __init__(self, name):
                 self.name = name
@@ -121,15 +62,30 @@ Calculate VWAP for the ledger in dollar amount</p></div>
                 self.trades = {}
 
         def add_order(self, new_order):
+                &#34;&#34;&#34;
+                Add new orders
+
+                :param new_order: Order  
+                &#34;&#34;&#34;
                 self.orders[new_order.id] = new_order
 
         def remove_order(self, order):
+                &#34;&#34;&#34;
+                Remove existing orders
+
+                :param order: Order | OrderEvent  
+                &#34;&#34;&#34;
                 try:
                         del self.orders[order.id]
                 except KeyError:
                         print(&#34;Unable to remove Order {}&#34;.format(order.id))
 
         def update_order(self, order_event):
+                &#34;&#34;&#34;
+                Update existing orders with new order updates from server
+
+                :param order_event: OrderEvent  
+                &#34;&#34;&#34;
                 try:
                         curr_order = self.orders[order_event.id]
                         if (curr_order.ticker==order_event.ticker) and (curr_order.side==order_event.side):
@@ -141,15 +97,28 @@ Calculate VWAP for the ledger in dollar amount</p></div>
                         print(&#34;Unable to update Order {}&#34;.format(order_event.id))
 
         def clear_orders(self):
+                &#34;&#34;&#34;
+                Clear all orders in the ledger 
+                &#34;&#34;&#34;
                 self.orders.clear()
 
         def get_order(self, order_id=None):
+                &#34;&#34;&#34;
+                Retrieve respective order based on the id. Retrieve all orders if order_id is None
+
+                :param order_id: str
+                &#34;&#34;&#34;
                 if not order_id:
                         return self.orders
                 else:
                         return self.orders[order_id]
 
         def add_trade(self, new_trade):
+                &#34;&#34;&#34;
+                Add new trades
+
+                :param new_trade: Trade  
+                &#34;&#34;&#34;
                 if new_trade.id in self.trades:
                         curr_trade = self.trades[new_trade.id]
                         self.trades[new_trade.id] = curr_trade + new_trade
@@ -157,27 +126,46 @@ Calculate VWAP for the ledger in dollar amount</p></div>
                         self.trades[new_trade.id] = new_trade
 
         def remove_trade(self, trade):
+                &#34;&#34;&#34;
+                Remove existing trades
+
+                :param trade: Trade  
+                &#34;&#34;&#34;
                 try:
                         del self.trades[trade.id]
                 except KeyError:
                         print(&#34;No such trade exists for removal&#34;)
 
         def clear_trades(self):
+                &#34;&#34;&#34;
+                Clear all trades in the ledger 
+                &#34;&#34;&#34;
                 self.trades.clear()
 
         def get_trade(self, trade_id=None):
+                &#34;&#34;&#34;
+                Retrieve respective trade based on the id. Retrieve all trades if Order.id is None  
+
+                :param trade_id: str
+                &#34;&#34;&#34;
                 if not trade_id:
                         return self.trades
                 else:
                         return self.trades[trade_id]
 
         def calc_asset_trading_volume(self) -&gt; float:
+                &#34;&#34;&#34;
+                Calculate total trading volume for the ledger in dollar amount
+                &#34;&#34;&#34;
                 trading_volume = 0
                 for trade in self.trades.values():
                         trading_volume += (trade.price * trade.qty)
                 return trading_volume
 
         def calc_trading_pnl(self) -&gt; float:
+                &#34;&#34;&#34;
+                Calculate total trading PnL for the ledger in dollar amount
+                &#34;&#34;&#34;
                 pnL = 0
                 for trade in self.trades.values():
                         if trade.side == fix.Side_SELL or trade.side == fix.Side_SELL_SHORT:
@@ -190,6 +178,9 @@ Calculate VWAP for the ledger in dollar amount</p></div>
 
 
         def calc_vwap(self) -&gt; float:
+                &#34;&#34;&#34;
+                Calculate VWAP for the ledger in dollar amount
+                &#34;&#34;&#34;
                 trading_volume = 0
                 total_quantity = 0
                 for trade in self.trades.values():
@@ -213,73 +204,81 @@ Calculate VWAP for the ledger in dollar amount</p></div>
 <span>def <span class="ident">add_order</span></span>(<span>self, new_order)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Add new orders</p>
+<p>:param new_order: Order</p></div>
 </dd>
 <dt id="app.common.interface_order.AssetLedger.add_trade"><code class="name flex">
 <span>def <span class="ident">add_trade</span></span>(<span>self, new_trade)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Add new trades</p>
+<p>:param new_trade: Trade</p></div>
 </dd>
 <dt id="app.common.interface_order.AssetLedger.calc_asset_trading_volume"><code class="name flex">
 <span>def <span class="ident">calc_asset_trading_volume</span></span>(<span>self) ‑> float</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Calculate total trading volume for the ledger in dollar amount</p></div>
 </dd>
 <dt id="app.common.interface_order.AssetLedger.calc_trading_pnl"><code class="name flex">
 <span>def <span class="ident">calc_trading_pnl</span></span>(<span>self) ‑> float</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Calculate total trading PnL for the ledger in dollar amount</p></div>
 </dd>
 <dt id="app.common.interface_order.AssetLedger.calc_vwap"><code class="name flex">
 <span>def <span class="ident">calc_vwap</span></span>(<span>self) ‑> float</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Calculate VWAP for the ledger in dollar amount</p></div>
 </dd>
 <dt id="app.common.interface_order.AssetLedger.clear_orders"><code class="name flex">
 <span>def <span class="ident">clear_orders</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Clear all orders in the ledger</p></div>
 </dd>
 <dt id="app.common.interface_order.AssetLedger.clear_trades"><code class="name flex">
 <span>def <span class="ident">clear_trades</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Clear all trades in the ledger</p></div>
 </dd>
 <dt id="app.common.interface_order.AssetLedger.get_order"><code class="name flex">
 <span>def <span class="ident">get_order</span></span>(<span>self, order_id=None)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Retrieve respective order based on the id. Retrieve all orders if order_id is None</p>
+<p>:param order_id: str</p></div>
 </dd>
 <dt id="app.common.interface_order.AssetLedger.get_trade"><code class="name flex">
 <span>def <span class="ident">get_trade</span></span>(<span>self, trade_id=None)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Retrieve respective trade based on the id. Retrieve all trades if Order.id is None
+</p>
+<p>:param trade_id: str</p></div>
 </dd>
 <dt id="app.common.interface_order.AssetLedger.remove_order"><code class="name flex">
 <span>def <span class="ident">remove_order</span></span>(<span>self, order)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Remove existing orders</p>
+<p>:param order: Order | OrderEvent</p></div>
 </dd>
 <dt id="app.common.interface_order.AssetLedger.remove_trade"><code class="name flex">
 <span>def <span class="ident">remove_trade</span></span>(<span>self, trade)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Remove existing trades</p>
+<p>:param trade: Trade</p></div>
 </dd>
 <dt id="app.common.interface_order.AssetLedger.update_order"><code class="name flex">
 <span>def <span class="ident">update_order</span></span>(<span>self, order_event)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Update existing orders with new order updates from server</p>
+<p>:param order_event: OrderEvent</p></div>
 </dd>
 </dl>
 </dd>
@@ -289,22 +288,13 @@ Calculate VWAP for the ledger in dollar amount</p></div>
 </code></dt>
 <dd>
 <div class="desc"><p>Track orders placed to the server</p>
-<h1 id="parameters">Parameters</h1>
-<p>ticker: str
-Asset symbol for which the order is tracking
-side: str
-Trade side of the order
-qty: float
-Quantity of the asset to be ordered
-ordtyp: str
-Limit or market order type
-security: str
-Classification of the asset for ordering
-price: float, default=0.0
-Limit price for asset ordering</p>
-<h1 id="methods">Methods</h1>
-<p>to_fix_cancel (self)
-Returns a string representation of a fix message for order cancellation</p></div>
+<p>Attributes<br>
+ticker: str - Asset symbol for which the order is tracking<br>
+side: str - Trade side of the order<br>
+qty: float - Quantity of the asset to be ordered<br>
+ordtyp: str - Limit or market order type<br>
+security: str - Classification of the asset for ordering<br>
+price: float, default=0.0 - Limit price for asset ordering</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -313,25 +303,13 @@ Returns a string representation of a fix message for order cancellation</p></div
         &#34;&#34;&#34;
         Track orders placed to the server
 
-        Parameters
-        ===========
-        ticker: str
-                Asset symbol for which the order is tracking
-        side: str
-                Trade side of the order
-        qty: float
-                Quantity of the asset to be ordered
-        ordtyp: str
-                Limit or market order type
-        security: str
-                Classification of the asset for ordering
-        price: float, default=0.0
-                Limit price for asset ordering
-
-        Methods
-        ===========
-        to_fix_cancel (self)
-                Returns a string representation of a fix message for order cancellation
+        Attributes  
+        ticker: str - Asset symbol for which the order is tracking  
+        side: str - Trade side of the order  
+        qty: float - Quantity of the asset to be ordered  
+        ordtyp: str - Limit or market order type  
+        security: str - Classification of the asset for ordering  
+        price: float, default=0.0 - Limit price for asset ordering  
         &#34;&#34;&#34;
         def __init__(self, ticker, side, qty, 
                                  ordtyp, security,  price=0.0):
@@ -347,6 +325,9 @@ Returns a string representation of a fix message for order cancellation</p></div
                 self.ord_status = None                  # Tag 39
 
         def to_fix_cancel(self):
+                &#34;&#34;&#34;
+                Returns a dictionary containing the required tags to send a FIX cancel order message
+                &#34;&#34;&#34;
                 _symbol_field = fix.Symbol().getField()
                 _side_field = fix.Side().getField()
                 _qty_field = fix.OrderQty().getField()
@@ -377,7 +358,7 @@ Returns a string representation of a fix message for order cancellation</p></div
 <span>def <span class="ident">to_fix_cancel</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Returns a dictionary containing the required tags to send a FIX cancel order message</p></div>
 </dd>
 </dl>
 </dd>
@@ -387,21 +368,14 @@ Returns a string representation of a fix message for order cancellation</p></div
 </code></dt>
 <dd>
 <div class="desc"><p>Capture order updates from server</p>
-<h1 id="parameters">Parameters</h1>
-<p>ordId: str, default=None
-Order ID for which the update applies to
-timestamp: str, default=None
-Timestamp of the order event
-qty: float: default=None
-Last filled quantity
-price: float, default=None
-Last filled price
-status: str, default=None
-Latest order status
-ticker: str, default=None
-Asset for which the update applies to
-side: str, default=None
-Trade side of the order</p></div>
+<p>Attributes<br>
+ordId: str, default=None - Order ID for which the update applies to<br>
+timestamp: str, default=None - Timestamp of the order event<br>
+qty: float: default=None - Last filled quantity<br>
+price: float, default=None - Last filled price<br>
+status: str, default=None - Latest order status<br>
+ticker: str, default=None - Asset for which the update applies to<br>
+side: str, default=None - Trade side of the order</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -410,22 +384,14 @@ Trade side of the order</p></div>
         &#34;&#34;&#34;
         Capture order updates from server
 
-        Parameters
-        ===========
-        ordId: str, default=None
-                Order ID for which the update applies to
-        timestamp: str, default=None
-                Timestamp of the order event
-        qty: float: default=None
-                Last filled quantity
-        price: float, default=None
-                Last filled price
-        status: str, default=None
-                Latest order status
-        ticker: str, default=None
-                Asset for which the update applies to
-        side: str, default=None
-                Trade side of the order
+        Attributes  
+        ordId: str, default=None - Order ID for which the update applies to  
+        timestamp: str, default=None - Timestamp of the order event  
+        qty: float: default=None - Last filled quantity  
+        price: float, default=None - Last filled price  
+        status: str, default=None - Latest order status  
+        ticker: str, default=None - Asset for which the update applies to  
+        side: str, default=None - Trade side of the order  
         &#34;&#34;&#34;
         def __init__(self, ordId=None, timestamp=None, qty=None,
                                  price=None, status=None, ticker=None, side=None,):
@@ -445,19 +411,13 @@ Trade side of the order</p></div>
 </code></dt>
 <dd>
 <div class="desc"><p>Track confirmed trades received from the server</p>
-<h1 id="parameters">Parameters</h1>
-<p>ordID: str
-Order ID for which the trade is related to
-timestamp: str
-Timestamp of the trade
-ticker: str
-Traded asset
-side: str
-Trade side
-qty: float
-Quantity of the asset for the particular trade id
-price: float, default=0.0
-Price of the trades for the particular trade id
+<p>Attributes<br>
+ordID: str - Order ID for which the trade is related to<br>
+timestamp: str - Timestamp of the trade<br>
+ticker: str - Traded asset<br>
+side: str - Trade side<br>
+qty: float - Quantity of the asset for the particular trade id<br>
+price: float, default=0.0 - Price of the trades for the particular trade id.
 Average price is calculated for partial order fills at different prices</p></div>
 <details class="source">
 <summary>
@@ -467,21 +427,14 @@ Average price is calculated for partial order fills at different prices</p></div
         &#34;&#34;&#34;
         Track confirmed trades received from the server
 
-        Parameters
-        ===========
-        ordID: str
-                Order ID for which the trade is related to
-        timestamp: str
-                Timestamp of the trade
-        ticker: str
-                Traded asset
-        side: str
-                Trade side
-        qty: float
-                Quantity of the asset for the particular trade id
-        price: float, default=0.0
-                Price of the trades for the particular trade id
-                Average price is calculated for partial order fills at different prices
+        Attributes  
+        ordID: str - Order ID for which the trade is related to  
+        timestamp: str - Timestamp of the trade  
+        ticker: str - Traded asset  
+        side: str - Trade side  
+        qty: float - Quantity of the asset for the particular trade id  
+        price: float, default=0.0 - Price of the trades for the particular trade id. 
+                Average price is calculated for partial order fills at different prices  
         &#34;&#34;&#34;
         def __init__(self, ordID, timestamp, ticker, 
                                  side, qty, price):
@@ -521,28 +474,8 @@ Average price is calculated for partial order fills at different prices</p></div
 </code></dt>
 <dd>
 <div class="desc"><p>Trading Book to aggregate all trading asset ledgers</p>
-<h1 id="parameters">Parameters</h1>
-<p>name: str
-Name of the trading book</p>
-<h1 id="methods">Methods</h1>
-<p>log_transaction (self, Order|OrderUpdateEvent|Trade)
-Add new transaction to respective ledger
-erase_transaction (self, OrderUpdateEvent|Trade)
-Remove transaction from respective ledger
-update_transaction (self, OrderUpdateEvent)
-Update transaction for respective ledger with new order updates from server
-get_ledger (self)
-Get the ledger for a particular asset
-clear_ledger (self, Order.id)
-Remove the ledger for a particular asset
-reset_ledgers (self, Trade)
-Remove all ledgers
-calc_book_trading_volume (self, AssetLedger.name)
-Get total trading volume for the trading book in dollar amount
-calc_book_pnl (self, AssetLedger.name)
-Get total trading PnL for the trading book in dollar amount
-calc_ledger_vwap (self, AssetLedger.name)
-Get VWAP for each ledger in the trading book in dollar amount</p></div>
+<p>Attributes<br>
+name: str - Name of the trading book</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -551,31 +484,8 @@ Get VWAP for each ledger in the trading book in dollar amount</p></div>
         &#34;&#34;&#34;
         Trading Book to aggregate all trading asset ledgers
 
-        Parameters
-        ==========
-        name: str
-                Name of the trading book
-
-        Methods
-        ==========
-        log_transaction (self, Order|OrderUpdateEvent|Trade)
-                Add new transaction to respective ledger
-        erase_transaction (self, OrderUpdateEvent|Trade)
-                Remove transaction from respective ledger
-        update_transaction (self, OrderUpdateEvent)
-                Update transaction for respective ledger with new order updates from server
-        get_ledger (self)
-                Get the ledger for a particular asset
-        clear_ledger (self, Order.id)
-                Remove the ledger for a particular asset
-        reset_ledgers (self, Trade)
-                Remove all ledgers
-        calc_book_trading_volume (self, AssetLedger.name)
-                Get total trading volume for the trading book in dollar amount
-        calc_book_pnl (self, AssetLedger.name)
-                Get total trading PnL for the trading book in dollar amount
-        calc_ledger_vwap (self, AssetLedger.name)
-                Get VWAP for each ledger in the trading book in dollar amount
+        Attributes  
+        name: str - Name of the trading book  
         &#34;&#34;&#34;
         def __init__(self, name, assets):
                 self.name = name
@@ -593,6 +503,11 @@ Get VWAP for each ledger in the trading book in dollar amount</p></div>
                         raise ValueError(&#34;Invalid asset for initializing trading book - {}&#34;.format(assets))
 
         def log_transaction(self, transaction):
+                &#34;&#34;&#34;
+                Add new transaction to respective ledger
+
+                :param transaction: Order | OrderUpdateEvent | Trade
+                &#34;&#34;&#34;
                 if isinstance(transaction, Order) or isinstance(transaction, OrderUpdateEvent):
                         self.ledgers[transaction.ticker].add_order(transaction)
                 elif isinstance(transaction, Trade):
@@ -601,6 +516,11 @@ Get VWAP for each ledger in the trading book in dollar amount</p></div>
                         raise ValueError(&#34;Invalid transaction&#34;)
 
         def erase_transaction(self, transaction):
+                &#34;&#34;&#34;
+                Remove transaction from respective ledger
+
+                :param transaction: OrderUpdateEvent | Trade
+                &#34;&#34;&#34;
                 if isinstance(transaction, OrderUpdateEvent):
                         if transaction.ticker:
                                 self.ledgers[transaction.ticker].remove_order(transaction)
@@ -616,12 +536,22 @@ Get VWAP for each ledger in the trading book in dollar amount</p></div>
                         raise ValueError(&#34;Invalid transaction&#34;)
 
         def update_transaction(self, transaction):
+                &#34;&#34;&#34;
+                Update transaction for respective ledger with new order updates from server
+
+                :param transaction: OrderUpdateEvent
+                &#34;&#34;&#34;
                 if isinstance(transaction, OrderUpdateEvent):
                         self.ledgers[transaction.ticker].update_order(transaction)
                 else:
                         raise ValueError(&#34;Invalid transaction&#34;)
 
         def get_ledger(self, ticker=None):
+                &#34;&#34;&#34;
+                Get the ledger for a particular asset
+
+                :param ticker: str
+                &#34;&#34;&#34;
                 if not ticker:
                         return self.ledgers
                 else:
@@ -631,15 +561,28 @@ Get VWAP for each ledger in the trading book in dollar amount</p></div>
                                 print(&#34;No such ledger in trading book to retrieve - {}&#34;.format(ticker))
 
         def clear_ledger(self, ticker):
+                &#34;&#34;&#34;
+                Remove the ledger for a particular asset
+
+                :param ticker: str
+                &#34;&#34;&#34;
                 try:
                         del self.ledgers[ticker]
                 except KeyError:
                         print(&#34;No such ledger in trading book to remove - {}&#34;.format(ticker))
 
         def reset_ledgers(self):
+                &#34;&#34;&#34;
+                Remove all ledgers
+                &#34;&#34;&#34;
                 self.ledgers.clear()
 
         def get_book_trading_volume(self, ticker=None):
+                &#34;&#34;&#34;
+                Get total trading volume for the trading book in dollar amount
+
+                :param ticker: str
+                &#34;&#34;&#34;
                 trade_vol = 0
                 try:
                         if ticker is None:
@@ -653,6 +596,11 @@ Get VWAP for each ledger in the trading book in dollar amount</p></div>
                         return round(trade_vol, 2)
                                 
         def get_book_pnl(self, ticker=None):
+                &#34;&#34;&#34;
+                Get total trading PnL for the trading book in dollar amount
+
+                :param ticker: str
+                &#34;&#34;&#34;
                 pnL = 0
                 try:
                         if ticker is None:
@@ -666,6 +614,11 @@ Get VWAP for each ledger in the trading book in dollar amount</p></div>
                         return round(pnL, 2)
 
         def get_ledger_vwap(self, ticker=None):
+                &#34;&#34;&#34;
+                Get VWAP for each ledger in the trading book in dollar amount
+
+                :param ticker: str
+                &#34;&#34;&#34;
                 ledger_vwap = {}
                 try:
                         if ticker is None:
@@ -688,55 +641,63 @@ Get VWAP for each ledger in the trading book in dollar amount</p></div>
 <span>def <span class="ident">clear_ledger</span></span>(<span>self, ticker)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Remove the ledger for a particular asset</p>
+<p>:param ticker: str</p></div>
 </dd>
 <dt id="app.common.interface_order.TradingBook.erase_transaction"><code class="name flex">
 <span>def <span class="ident">erase_transaction</span></span>(<span>self, transaction)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Remove transaction from respective ledger</p>
+<p>:param transaction: OrderUpdateEvent | Trade</p></div>
 </dd>
 <dt id="app.common.interface_order.TradingBook.get_book_pnl"><code class="name flex">
 <span>def <span class="ident">get_book_pnl</span></span>(<span>self, ticker=None)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get total trading PnL for the trading book in dollar amount</p>
+<p>:param ticker: str</p></div>
 </dd>
 <dt id="app.common.interface_order.TradingBook.get_book_trading_volume"><code class="name flex">
 <span>def <span class="ident">get_book_trading_volume</span></span>(<span>self, ticker=None)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get total trading volume for the trading book in dollar amount</p>
+<p>:param ticker: str</p></div>
 </dd>
 <dt id="app.common.interface_order.TradingBook.get_ledger"><code class="name flex">
 <span>def <span class="ident">get_ledger</span></span>(<span>self, ticker=None)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get the ledger for a particular asset</p>
+<p>:param ticker: str</p></div>
 </dd>
 <dt id="app.common.interface_order.TradingBook.get_ledger_vwap"><code class="name flex">
 <span>def <span class="ident">get_ledger_vwap</span></span>(<span>self, ticker=None)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get VWAP for each ledger in the trading book in dollar amount</p>
+<p>:param ticker: str</p></div>
 </dd>
 <dt id="app.common.interface_order.TradingBook.log_transaction"><code class="name flex">
 <span>def <span class="ident">log_transaction</span></span>(<span>self, transaction)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Add new transaction to respective ledger</p>
+<p>:param transaction: Order | OrderUpdateEvent | Trade</p></div>
 </dd>
 <dt id="app.common.interface_order.TradingBook.reset_ledgers"><code class="name flex">
 <span>def <span class="ident">reset_ledgers</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Remove all ledgers</p></div>
 </dd>
 <dt id="app.common.interface_order.TradingBook.update_transaction"><code class="name flex">
 <span>def <span class="ident">update_transaction</span></span>(<span>self, transaction)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Update transaction for respective ledger with new order updates from server</p>
+<p>:param transaction: OrderUpdateEvent</p></div>
 </dd>
 </dl>
 </dd>

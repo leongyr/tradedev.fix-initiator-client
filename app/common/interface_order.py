@@ -5,22 +5,14 @@ class OrderUpdateEvent:
 	"""
 	Capture order updates from server
 
-	Parameters
-	===========
-	ordId: str, default=None
-		Order ID for which the update applies to
-	timestamp: str, default=None
-		Timestamp of the order event
-	qty: float: default=None
-		Last filled quantity
-	price: float, default=None
-		Last filled price
-	status: str, default=None
-		Latest order status
-	ticker: str, default=None
-		Asset for which the update applies to
-	side: str, default=None
-		Trade side of the order
+	Attributes  
+	ordId: str, default=None - Order ID for which the update applies to  
+	timestamp: str, default=None - Timestamp of the order event  
+	qty: float: default=None - Last filled quantity  
+	price: float, default=None - Last filled price  
+	status: str, default=None - Latest order status  
+	ticker: str, default=None - Asset for which the update applies to  
+	side: str, default=None - Trade side of the order  
 	"""
 	def __init__(self, ordId=None, timestamp=None, qty=None,
 				 price=None, status=None, ticker=None, side=None,):
@@ -38,25 +30,13 @@ class Order:
 	"""
 	Track orders placed to the server
 
-	Parameters
-	===========
-	ticker: str
-		Asset symbol for which the order is tracking
-	side: str
-		Trade side of the order
-	qty: float
-		Quantity of the asset to be ordered
-	ordtyp: str
-		Limit or market order type
-	security: str
-		Classification of the asset for ordering
-	price: float, default=0.0
-		Limit price for asset ordering
-
-	Methods
-	===========
-	to_fix_cancel (self)
-		Returns a string representation of a fix message for order cancellation
+	Attributes  
+	ticker: str - Asset symbol for which the order is tracking  
+	side: str - Trade side of the order  
+	qty: float - Quantity of the asset to be ordered  
+	ordtyp: str - Limit or market order type  
+	security: str - Classification of the asset for ordering  
+	price: float, default=0.0 - Limit price for asset ordering  
 	"""
 	def __init__(self, ticker, side, qty, 
 				 ordtyp, security,  price=0.0):
@@ -72,6 +52,9 @@ class Order:
 		self.ord_status = None			# Tag 39
 
 	def to_fix_cancel(self):
+		"""
+		Returns a dictionary containing the required tags to send a FIX cancel order message
+		"""
 		_symbol_field = fix.Symbol().getField()
 		_side_field = fix.Side().getField()
 		_qty_field = fix.OrderQty().getField()
@@ -101,21 +84,14 @@ class Trade:
 	"""
 	Track confirmed trades received from the server
 
-	Parameters
-	===========
-	ordID: str
-		Order ID for which the trade is related to
-	timestamp: str
-		Timestamp of the trade
-	ticker: str
-		Traded asset
-	side: str
-		Trade side
-	qty: float
-		Quantity of the asset for the particular trade id
-	price: float, default=0.0
-		Price of the trades for the particular trade id
-		Average price is calculated for partial order fills at different prices
+	Attributes  
+	ordID: str - Order ID for which the trade is related to  
+	timestamp: str - Timestamp of the trade  
+	ticker: str - Traded asset  
+	side: str - Trade side  
+	qty: float - Quantity of the asset for the particular trade id  
+	price: float, default=0.0 - Price of the trades for the particular trade id. 
+		Average price is calculated for partial order fills at different prices  
 	"""
 	def __init__(self, ordID, timestamp, ticker, 
 				 side, qty, price):
@@ -155,39 +131,8 @@ class AssetLedger:
 	Ledger to hold all pending orders and confirmed trades for 
 	a particular asset
 
-	Parameters
-	==========
-	name: str
-		Asset to which the ledger applies
-
-	Methods
-	==========
-	add_order (self, Order)
-		Add new orders
-	remove_order (self, Order)
-		Remove existing orders
-	update_order (self, OrderUpdateEvent)
-		Update existing orders with new order updates from server
-	clear_orders (self)
-		Clear all orders in the ledger
-	get_order (self, Order.id)
-		Retrieve respective order based on the id
-		Retrieve all orders if Order.id is None
-	add_trade (self, Trade)
-		Add new trades
-	remove_trade (self, Trade)
-		Remove existing trades
-	clear_trades (self)
-		Clear all trades in the ledger
-	get_trade (self, Trade.id)
-		Retrieve respective trade based on the id
-		Retrieve all trades if Order.id is None
-	calc_asset_trading_volume (self)
-		Calculate total trading volume for the ledger in dollar amount
-	calc_trading_pnl (self)
-		Calculate total trading PnL for the ledger in dollar amount
-	calc_vwap (self)
-		Calculate VWAP for the ledger in dollar amount
+	Attributes  
+	name: str - Asset to which the ledger applies
 	"""
 	def __init__(self, name):
 		self.name = name
@@ -195,15 +140,30 @@ class AssetLedger:
 		self.trades = {}
 
 	def add_order(self, new_order):
+		"""
+		Add new orders
+
+		:param new_order: Order  
+		"""
 		self.orders[new_order.id] = new_order
 
 	def remove_order(self, order):
+		"""
+		Remove existing orders
+
+		:param order: Order | OrderEvent  
+		"""
 		try:
 			del self.orders[order.id]
 		except KeyError:
 			print("Unable to remove Order {}".format(order.id))
 
 	def update_order(self, order_event):
+		"""
+		Update existing orders with new order updates from server
+
+		:param order_event: OrderEvent  
+		"""
 		try:
 			curr_order = self.orders[order_event.id]
 			if (curr_order.ticker==order_event.ticker) and (curr_order.side==order_event.side):
@@ -215,15 +175,28 @@ class AssetLedger:
 			print("Unable to update Order {}".format(order_event.id))
 
 	def clear_orders(self):
+		"""
+		Clear all orders in the ledger 
+		"""
 		self.orders.clear()
 
 	def get_order(self, order_id=None):
+		"""
+		Retrieve respective order based on the id. Retrieve all orders if order_id is None
+
+		:param order_id: str
+		"""
 		if not order_id:
 			return self.orders
 		else:
 			return self.orders[order_id]
 
 	def add_trade(self, new_trade):
+		"""
+		Add new trades
+
+		:param new_trade: Trade  
+		"""
 		if new_trade.id in self.trades:
 			curr_trade = self.trades[new_trade.id]
 			self.trades[new_trade.id] = curr_trade + new_trade
@@ -231,27 +204,46 @@ class AssetLedger:
 			self.trades[new_trade.id] = new_trade
 
 	def remove_trade(self, trade):
+		"""
+		Remove existing trades
+
+		:param trade: Trade  
+		"""
 		try:
 			del self.trades[trade.id]
 		except KeyError:
 			print("No such trade exists for removal")
 
 	def clear_trades(self):
+		"""
+		Clear all trades in the ledger 
+		"""
 		self.trades.clear()
 
 	def get_trade(self, trade_id=None):
+		"""
+		Retrieve respective trade based on the id. Retrieve all trades if Order.id is None  
+
+		:param trade_id: str
+		"""
 		if not trade_id:
 			return self.trades
 		else:
 			return self.trades[trade_id]
 
 	def calc_asset_trading_volume(self) -> float:
+		"""
+		Calculate total trading volume for the ledger in dollar amount
+		"""
 		trading_volume = 0
 		for trade in self.trades.values():
 			trading_volume += (trade.price * trade.qty)
 		return trading_volume
 
 	def calc_trading_pnl(self) -> float:
+		"""
+		Calculate total trading PnL for the ledger in dollar amount
+		"""
 		pnL = 0
 		for trade in self.trades.values():
 			if trade.side == fix.Side_SELL or trade.side == fix.Side_SELL_SHORT:
@@ -264,6 +256,9 @@ class AssetLedger:
 
 
 	def calc_vwap(self) -> float:
+		"""
+		Calculate VWAP for the ledger in dollar amount
+		"""
 		trading_volume = 0
 		total_quantity = 0
 		for trade in self.trades.values():
@@ -286,31 +281,8 @@ class TradingBook:
 	"""
 	Trading Book to aggregate all trading asset ledgers
 
-	Parameters
-	==========
-	name: str
-		Name of the trading book
-
-	Methods
-	==========
-	log_transaction (self, Order|OrderUpdateEvent|Trade)
-		Add new transaction to respective ledger
-	erase_transaction (self, OrderUpdateEvent|Trade)
-		Remove transaction from respective ledger
-	update_transaction (self, OrderUpdateEvent)
-		Update transaction for respective ledger with new order updates from server
-	get_ledger (self)
-		Get the ledger for a particular asset
-	clear_ledger (self, Order.id)
-		Remove the ledger for a particular asset
-	reset_ledgers (self, Trade)
-		Remove all ledgers
-	calc_book_trading_volume (self, AssetLedger.name)
-		Get total trading volume for the trading book in dollar amount
-	calc_book_pnl (self, AssetLedger.name)
-		Get total trading PnL for the trading book in dollar amount
-	calc_ledger_vwap (self, AssetLedger.name)
-		Get VWAP for each ledger in the trading book in dollar amount
+	Attributes  
+	name: str - Name of the trading book  
 	"""
 	def __init__(self, name, assets):
 		self.name = name
@@ -328,6 +300,11 @@ class TradingBook:
 			raise ValueError("Invalid asset for initializing trading book - {}".format(assets))
 
 	def log_transaction(self, transaction):
+		"""
+		Add new transaction to respective ledger
+
+		:param transaction: Order | OrderUpdateEvent | Trade
+		"""
 		if isinstance(transaction, Order) or isinstance(transaction, OrderUpdateEvent):
 			self.ledgers[transaction.ticker].add_order(transaction)
 		elif isinstance(transaction, Trade):
@@ -336,6 +313,11 @@ class TradingBook:
 			raise ValueError("Invalid transaction")
 
 	def erase_transaction(self, transaction):
+		"""
+		Remove transaction from respective ledger
+
+		:param transaction: OrderUpdateEvent | Trade
+		"""
 		if isinstance(transaction, OrderUpdateEvent):
 			if transaction.ticker:
 				self.ledgers[transaction.ticker].remove_order(transaction)
@@ -351,12 +333,22 @@ class TradingBook:
 			raise ValueError("Invalid transaction")
 
 	def update_transaction(self, transaction):
+		"""
+		Update transaction for respective ledger with new order updates from server
+
+		:param transaction: OrderUpdateEvent
+		"""
 		if isinstance(transaction, OrderUpdateEvent):
 			self.ledgers[transaction.ticker].update_order(transaction)
 		else:
 			raise ValueError("Invalid transaction")
 
 	def get_ledger(self, ticker=None):
+		"""
+		Get the ledger for a particular asset
+
+		:param ticker: str
+		"""
 		if not ticker:
 			return self.ledgers
 		else:
@@ -366,15 +358,28 @@ class TradingBook:
 				print("No such ledger in trading book to retrieve - {}".format(ticker))
 
 	def clear_ledger(self, ticker):
+		"""
+		Remove the ledger for a particular asset
+
+		:param ticker: str
+		"""
 		try:
 			del self.ledgers[ticker]
 		except KeyError:
 			print("No such ledger in trading book to remove - {}".format(ticker))
 
 	def reset_ledgers(self):
+		"""
+		Remove all ledgers
+		"""
 		self.ledgers.clear()
 
 	def get_book_trading_volume(self, ticker=None):
+		"""
+		Get total trading volume for the trading book in dollar amount
+
+		:param ticker: str
+		"""
 		trade_vol = 0
 		try:
 			if ticker is None:
@@ -388,6 +393,11 @@ class TradingBook:
 			return round(trade_vol, 2)
 				
 	def get_book_pnl(self, ticker=None):
+		"""
+		Get total trading PnL for the trading book in dollar amount
+
+		:param ticker: str
+		"""
 		pnL = 0
 		try:
 			if ticker is None:
@@ -401,6 +411,11 @@ class TradingBook:
 			return round(pnL, 2)
 
 	def get_ledger_vwap(self, ticker=None):
+		"""
+		Get VWAP for each ledger in the trading book in dollar amount
+
+		:param ticker: str
+		"""
 		ledger_vwap = {}
 		try:
 			if ticker is None:

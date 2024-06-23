@@ -176,10 +176,7 @@ hljs.highlightAll();
                 &#39;&#39;&#39;
                 Send Buy orders to the FIX server in the form of a FIX message
                 
-                Parameters
-                ===========
-                order_req: Order
-                        Order with the required information to send a valid Buy order to FIX server
+                :param order_req: Order
                 &#39;&#39;&#39;
                 _ticker = order_req.ticker
                 _side = order_req.side
@@ -216,10 +213,7 @@ hljs.highlightAll();
                 &#39;&#39;&#39;
                 Send Cancel orders to the FIX server in the form of a FIX message
                 
-                Parameters
-                ===========
-                fix_repr: dict
-                        Dictionary with the required tags for sending a Cancel order to FIX server
+                :param fix_repr: dict
                 &#39;&#39;&#39;
                 order_msg = self._newMsg()
                 order_msg.getHeader().setField(fix.MsgType(fix.MsgType_OrderCancelRequest))
@@ -240,11 +234,7 @@ hljs.highlightAll();
                 Registers the necessary callbacks to add, remove and update ledgers
                 within the trading book
 
-                Parameters
-                ===========
-                methods: dict
-                        Contains the necessary callback functions for the client upon receiving order
-                        updates from the FIX server
+                :param methods: dict{label: method}
                 &#34;&#34;&#34;
                 if isinstance(methods, dict):
                         try:
@@ -281,9 +271,7 @@ hljs.highlightAll();
 </code></dt>
 <dd>
 <div class="desc"><p>Send Cancel orders to the FIX server in the form of a FIX message</p>
-<h1 id="parameters">Parameters</h1>
-<p>fix_repr: dict
-Dictionary with the required tags for sending a Cancel order to FIX server</p></div>
+<p>:param fix_repr: dict</p></div>
 </dd>
 <dt id="app.client.fix_client.FixClient.fromAdmin"><code class="name flex">
 <span>def <span class="ident">fromAdmin</span></span>(<span>self, message, sessionID)</span>
@@ -321,19 +309,14 @@ Dictionary with the required tags for sending a Cancel order to FIX server</p></
 <dd>
 <div class="desc"><p>Registers the necessary callbacks to add, remove and update ledgers
 within the trading book</p>
-<h1 id="parameters">Parameters</h1>
-<p>methods: dict
-Contains the necessary callback functions for the client upon receiving order
-updates from the FIX server</p></div>
+<p>:param methods: dict{label: method}</p></div>
 </dd>
 <dt id="app.client.fix_client.FixClient.sendNewOrder"><code class="name flex">
 <span>def <span class="ident">sendNewOrder</span></span>(<span>self, order_req)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Send Buy orders to the FIX server in the form of a FIX message</p>
-<h1 id="parameters">Parameters</h1>
-<p>order_req: Order
-Order with the required information to send a valid Buy order to FIX server</p></div>
+<p>:param order_req: Order</p></div>
 </dd>
 <dt id="app.client.fix_client.FixClient.toAdmin"><code class="name flex">
 <span>def <span class="ident">toAdmin</span></span>(<span>self, message, sessionID)</span>
