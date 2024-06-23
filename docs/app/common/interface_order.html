@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.0">
+<title>app.common.interface_order API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>app.common.interface_order</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="app.common.interface_order.AssetLedger"><code class="flex name class">
+<span>class <span class="ident">AssetLedger</span></span>
+<span>(</span><span>name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ledger to hold all pending orders and confirmed trades for
+a particular asset</p>
+<h1 id="parameters">Parameters</h1>
+<p>name: str
+Asset to which the ledger applies</p>
+<h1 id="methods">Methods</h1>
+<p>add_order (self, Order)
+Add new orders
+remove_order (self, Order)
+Remove existing orders
+update_order (self, OrderUpdateEvent)
+Update existing orders with new order updates from server
+clear_orders (self)
+Clear all orders in the ledger
+get_order (self, Order.id)
+Retrieve respective order based on the id
+Retrieve all orders if Order.id is None
+add_trade (self, Trade)
+Add new trades
+remove_trade (self, Trade)
+Remove existing trades
+clear_trades (self)
+Clear all trades in the ledger
+get_trade (self, Trade.id)
+Retrieve respective trade based on the id
+Retrieve all trades if Order.id is None
+calc_asset_trading_volume (self)
+Calculate total trading volume for the ledger in dollar amount
+calc_trading_pnl (self)
+Calculate total trading PnL for the ledger in dollar amount
+calc_vwap (self)
+Calculate VWAP for the ledger in dollar amount</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AssetLedger:
+        &#34;&#34;&#34;
+        Ledger to hold all pending orders and confirmed trades for 
+        a particular asset
+
+        Parameters
+        ==========
+        name: str
+                Asset to which the ledger applies
+
+        Methods
+        ==========
+        add_order (self, Order)
+                Add new orders
+        remove_order (self, Order)
+                Remove existing orders
+        update_order (self, OrderUpdateEvent)
+                Update existing orders with new order updates from server
+        clear_orders (self)
+                Clear all orders in the ledger
+        get_order (self, Order.id)
+                Retrieve respective order based on the id
+                Retrieve all orders if Order.id is None
+        add_trade (self, Trade)
+                Add new trades
+        remove_trade (self, Trade)
+                Remove existing trades
+        clear_trades (self)
+                Clear all trades in the ledger
+        get_trade (self, Trade.id)
+                Retrieve respective trade based on the id
+                Retrieve all trades if Order.id is None
+        calc_asset_trading_volume (self)
+                Calculate total trading volume for the ledger in dollar amount
+        calc_trading_pnl (self)
+                Calculate total trading PnL for the ledger in dollar amount
+        calc_vwap (self)
+                Calculate VWAP for the ledger in dollar amount
+        &#34;&#34;&#34;
+        def __init__(self, name):
+                self.name = name
+                self.orders = {}
+                self.trades = {}
+
+        def add_order(self, new_order):
+                self.orders[new_order.id] = new_order
+
+        def remove_order(self, order):
+                try:
+                        del self.orders[order.id]
+                except KeyError:
+                        print(&#34;Unable to remove Order {}&#34;.format(order.id))
+
+        def update_order(self, order_event):
+                try:
+                        curr_order = self.orders[order_event.id]
+                        if (curr_order.ticker==order_event.ticker) and (curr_order.side==order_event.side):
+                                curr_order.timestamp = order_event.timestamp
+                                curr_order.ord_status = order_event.status
+                                if order_event.status == fix.OrdStatus_PARTIALLY_FILLED:
+                                        curr_order.qty -= order_event.qty
+                except KeyError:
+                        print(&#34;Unable to update Order {}&#34;.format(order_event.id))
+
+        def clear_orders(self):
+                self.orders.clear()
+
+        def get_order(self, order_id=None):
+                if not order_id:
+                        return self.orders
+                else:
+                        return self.orders[order_id]
+
+        def add_trade(self, new_trade):
+                if new_trade.id in self.trades:
+                        curr_trade = self.trades[new_trade.id]
+                        self.trades[new_trade.id] = curr_trade + new_trade
+                else:
+                        self.trades[new_trade.id] = new_trade
+
+        def remove_trade(self, trade):
+                try:
+                        del self.trades[trade.id]
+                except KeyError:
+                        print(&#34;No such trade exists for removal&#34;)
+
+        def clear_trades(self):
+                self.trades.clear()
+
+        def get_trade(self, trade_id=None):
+                if not trade_id:
+                        return self.trades
+                else:
+                        return self.trades[trade_id]
+
+        def calc_asset_trading_volume(self) -&gt; float:
+                trading_volume = 0
+                for trade in self.trades.values():
+                        trading_volume += (trade.price * trade.qty)
+                return trading_volume
+
+        def calc_trading_pnl(self) -&gt; float:
+                pnL = 0
+                for trade in self.trades.values():
+                        if trade.side == fix.Side_SELL or trade.side == fix.Side_SELL_SHORT:
+                                pnL += (trade.price * trade.qty)
+                        elif trade.side == fix.Side_BUY:
+                                pnL -= (trade.price * trade.qty)
+                        else:
+                                raise ValueError(&#34;Unknown trading side&#34;)
+                return pnL
+
+
+        def calc_vwap(self) -&gt; float:
+                trading_volume = 0
+                total_quantity = 0
+                for trade in self.trades.values():
+                        trading_volume += (trade.price * trade.qty)
+                        total_quantity += trade.qty
+                if total_quantity == 0:
+                        # Return 0 in event no trade registered for an asset
+                        return 0
+                else:
+                        return trading_volume / total_quantity
+
+        def __str__(self):
+                return f&#34;Ledger: {self.name}, Orders: {len(self.orders)}, Trades: {len(self.trades)}&#34;
+
+        def __contains__(self, item):
+                return (item.id in self.orders) or (item.id in self.trades)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="app.common.interface_order.AssetLedger.add_order"><code class="name flex">
+<span>def <span class="ident">add_order</span></span>(<span>self, new_order)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.AssetLedger.add_trade"><code class="name flex">
+<span>def <span class="ident">add_trade</span></span>(<span>self, new_trade)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.AssetLedger.calc_asset_trading_volume"><code class="name flex">
+<span>def <span class="ident">calc_asset_trading_volume</span></span>(<span>self) ‑> float</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.AssetLedger.calc_trading_pnl"><code class="name flex">
+<span>def <span class="ident">calc_trading_pnl</span></span>(<span>self) ‑> float</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.AssetLedger.calc_vwap"><code class="name flex">
+<span>def <span class="ident">calc_vwap</span></span>(<span>self) ‑> float</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.AssetLedger.clear_orders"><code class="name flex">
+<span>def <span class="ident">clear_orders</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.AssetLedger.clear_trades"><code class="name flex">
+<span>def <span class="ident">clear_trades</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.AssetLedger.get_order"><code class="name flex">
+<span>def <span class="ident">get_order</span></span>(<span>self, order_id=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.AssetLedger.get_trade"><code class="name flex">
+<span>def <span class="ident">get_trade</span></span>(<span>self, trade_id=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.AssetLedger.remove_order"><code class="name flex">
+<span>def <span class="ident">remove_order</span></span>(<span>self, order)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.AssetLedger.remove_trade"><code class="name flex">
+<span>def <span class="ident">remove_trade</span></span>(<span>self, trade)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.AssetLedger.update_order"><code class="name flex">
+<span>def <span class="ident">update_order</span></span>(<span>self, order_event)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="app.common.interface_order.Order"><code class="flex name class">
+<span>class <span class="ident">Order</span></span>
+<span>(</span><span>ticker, side, qty, ordtyp, security, price=0.0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Track orders placed to the server</p>
+<h1 id="parameters">Parameters</h1>
+<p>ticker: str
+Asset symbol for which the order is tracking
+side: str
+Trade side of the order
+qty: float
+Quantity of the asset to be ordered
+ordtyp: str
+Limit or market order type
+security: str
+Classification of the asset for ordering
+price: float, default=0.0
+Limit price for asset ordering</p>
+<h1 id="methods">Methods</h1>
+<p>to_fix_cancel (self)
+Returns a string representation of a fix message for order cancellation</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Order:
+        &#34;&#34;&#34;
+        Track orders placed to the server
+
+        Parameters
+        ===========
+        ticker: str
+                Asset symbol for which the order is tracking
+        side: str
+                Trade side of the order
+        qty: float
+                Quantity of the asset to be ordered
+        ordtyp: str
+                Limit or market order type
+        security: str
+                Classification of the asset for ordering
+        price: float, default=0.0
+                Limit price for asset ordering
+
+        Methods
+        ===========
+        to_fix_cancel (self)
+                Returns a string representation of a fix message for order cancellation
+        &#34;&#34;&#34;
+        def __init__(self, ticker, side, qty, 
+                                 ordtyp, security,  price=0.0):
+                self.ticker = ticker                    # Tag 55
+                self.side = side                                # Tag 54
+                self.qty = qty                                  # Tag 38
+                self.ordtyp = ordtyp                    # Tag 40
+                self.security = security                # Tag 167
+                self.price = price                              # Tag 44
+                
+                self.id = None                                  # Tag 11
+                self.timestamp = None                   # Tag 60
+                self.ord_status = None                  # Tag 39
+
+        def to_fix_cancel(self):
+                _symbol_field = fix.Symbol().getField()
+                _side_field = fix.Side().getField()
+                _qty_field = fix.OrderQty().getField()
+                _security_field = fix.SecurityType().getField()
+                _id_field = fix.OrigClOrdID().getField()
+
+                fix_repr = {
+                        _symbol_field: self.ticker,
+                        _side_field: self.side,
+                        _qty_field: self.qty,
+                        _security_field: self.security,
+                        _id_field: self.id
+                }
+
+                return fix_repr
+
+        def __repr__(self):
+                return f&#34;Order({self.ticker}, {self.side}, {self.qty}, {self.ordtyp}, {self.security}, &#34; \
+                           f&#34;{round(self.price, 2)}, {self.ord_status}, {self.id}, {self.timestamp})&#34;
+
+        def __str__(self):
+                return f&#34;Order {self.id} ({self.timestamp}) - Ticker: {self.ticker}, Security: {self.security}, Side: {self.side}, &#34; \
+                           f&#34;Qty: {self.qty}, Type: {self.ordtyp}, Price: {self.price}, Status: {self.ord_status})&#34;</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="app.common.interface_order.Order.to_fix_cancel"><code class="name flex">
+<span>def <span class="ident">to_fix_cancel</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="app.common.interface_order.OrderUpdateEvent"><code class="flex name class">
+<span>class <span class="ident">OrderUpdateEvent</span></span>
+<span>(</span><span>ordId=None, timestamp=None, qty=None, price=None, status=None, ticker=None, side=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Capture order updates from server</p>
+<h1 id="parameters">Parameters</h1>
+<p>ordId: str, default=None
+Order ID for which the update applies to
+timestamp: str, default=None
+Timestamp of the order event
+qty: float: default=None
+Last filled quantity
+price: float, default=None
+Last filled price
+status: str, default=None
+Latest order status
+ticker: str, default=None
+Asset for which the update applies to
+side: str, default=None
+Trade side of the order</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class OrderUpdateEvent:
+        &#34;&#34;&#34;
+        Capture order updates from server
+
+        Parameters
+        ===========
+        ordId: str, default=None
+                Order ID for which the update applies to
+        timestamp: str, default=None
+                Timestamp of the order event
+        qty: float: default=None
+                Last filled quantity
+        price: float, default=None
+                Last filled price
+        status: str, default=None
+                Latest order status
+        ticker: str, default=None
+                Asset for which the update applies to
+        side: str, default=None
+                Trade side of the order
+        &#34;&#34;&#34;
+        def __init__(self, ordId=None, timestamp=None, qty=None,
+                                 price=None, status=None, ticker=None, side=None,):
+                self.id = ordId
+                self.timestamp = timestamp
+                self.qty = qty
+                self.price = price
+                self.status = status
+
+                self.ticker = ticker
+                self.side = side</code></pre>
+</details>
+</dd>
+<dt id="app.common.interface_order.Trade"><code class="flex name class">
+<span>class <span class="ident">Trade</span></span>
+<span>(</span><span>ordID, timestamp, ticker, side, qty, price)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Track confirmed trades received from the server</p>
+<h1 id="parameters">Parameters</h1>
+<p>ordID: str
+Order ID for which the trade is related to
+timestamp: str
+Timestamp of the trade
+ticker: str
+Traded asset
+side: str
+Trade side
+qty: float
+Quantity of the asset for the particular trade id
+price: float, default=0.0
+Price of the trades for the particular trade id
+Average price is calculated for partial order fills at different prices</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Trade:
+        &#34;&#34;&#34;
+        Track confirmed trades received from the server
+
+        Parameters
+        ===========
+        ordID: str
+                Order ID for which the trade is related to
+        timestamp: str
+                Timestamp of the trade
+        ticker: str
+                Traded asset
+        side: str
+                Trade side
+        qty: float
+                Quantity of the asset for the particular trade id
+        price: float, default=0.0
+                Price of the trades for the particular trade id
+                Average price is calculated for partial order fills at different prices
+        &#34;&#34;&#34;
+        def __init__(self, ordID, timestamp, ticker, 
+                                 side, qty, price):
+                self.id = ordID                                 # Tag 11
+                self.timestamp = timestamp              # Tag 52
+                self.ticker = ticker                    # Tag 55
+                self.side = side                                # Tag 54
+                self.qty = qty                                  # Tag 32
+                self.price = price                              # Tag 31
+
+        def __add__(self, other):
+                if isinstance(other, Trade):
+                        if (self.side == other.side) and (self.ticker == other.ticker):
+                                _new_qty = self.qty + other.qty
+                                _new_price = (self.qty*self.price + other.qty*other.price)/_new_qty
+                                _new_timestamp = max(int(dt.datetime.strptime(self.timestamp, &#39;%Y%m%d-%H:%M:%S.%f&#39;).timestamp()),
+                                                                         int(dt.datetime.strptime(other.timestamp, &#39;%Y%m%d-%H:%M:%S.%f&#39;).timestamp())
+                                                                        )
+                                _new_timestamp = (dt.datetime.fromtimestamp(_new_timestamp).strftime(&#34;%Y%m%d-%H:%M:%S.%f&#34;))[:-3]
+                                return Trade(other.id, _new_timestamp, other.ticker, other.side, _new_qty, _new_price)
+                        else:
+                                print(self.id, self.side, other.id, other.side)
+                                print(&#34;Trade with same ID but different side and/or ticker. To check.&#34;)
+                else:
+                        return NotImplemented
+
+        def __repr__(self):
+                return f&#34;Trade({self.id}, {self.timestamp}, {self.ticker}, {self.side} ,{self.qty}, {round(self.price, 2)})&#34;
+
+        def __str__(self):
+                return f&#34;Trade {self.id} ({self.timestamp}) - Ticker: {self.ticker}, Side: {self.side}, Qty: {self.qty}, Price: {round(self.price, 2)}&#34;</code></pre>
+</details>
+</dd>
+<dt id="app.common.interface_order.TradingBook"><code class="flex name class">
+<span>class <span class="ident">TradingBook</span></span>
+<span>(</span><span>name, assets)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Trading Book to aggregate all trading asset ledgers</p>
+<h1 id="parameters">Parameters</h1>
+<p>name: str
+Name of the trading book</p>
+<h1 id="methods">Methods</h1>
+<p>log_transaction (self, Order|OrderUpdateEvent|Trade)
+Add new transaction to respective ledger
+erase_transaction (self, OrderUpdateEvent|Trade)
+Remove transaction from respective ledger
+update_transaction (self, OrderUpdateEvent)
+Update transaction for respective ledger with new order updates from server
+get_ledger (self)
+Get the ledger for a particular asset
+clear_ledger (self, Order.id)
+Remove the ledger for a particular asset
+reset_ledgers (self, Trade)
+Remove all ledgers
+calc_book_trading_volume (self, AssetLedger.name)
+Get total trading volume for the trading book in dollar amount
+calc_book_pnl (self, AssetLedger.name)
+Get total trading PnL for the trading book in dollar amount
+calc_ledger_vwap (self, AssetLedger.name)
+Get VWAP for each ledger in the trading book in dollar amount</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TradingBook:
+        &#34;&#34;&#34;
+        Trading Book to aggregate all trading asset ledgers
+
+        Parameters
+        ==========
+        name: str
+                Name of the trading book
+
+        Methods
+        ==========
+        log_transaction (self, Order|OrderUpdateEvent|Trade)
+                Add new transaction to respective ledger
+        erase_transaction (self, OrderUpdateEvent|Trade)
+                Remove transaction from respective ledger
+        update_transaction (self, OrderUpdateEvent)
+                Update transaction for respective ledger with new order updates from server
+        get_ledger (self)
+                Get the ledger for a particular asset
+        clear_ledger (self, Order.id)
+                Remove the ledger for a particular asset
+        reset_ledgers (self, Trade)
+                Remove all ledgers
+        calc_book_trading_volume (self, AssetLedger.name)
+                Get total trading volume for the trading book in dollar amount
+        calc_book_pnl (self, AssetLedger.name)
+                Get total trading PnL for the trading book in dollar amount
+        calc_ledger_vwap (self, AssetLedger.name)
+                Get VWAP for each ledger in the trading book in dollar amount
+        &#34;&#34;&#34;
+        def __init__(self, name, assets):
+                self.name = name
+                self.ledgers = {}       # {ticker: AssetLedger}
+
+                self._initialize_ledgers(assets)
+
+        def _initialize_ledgers(self, assets):
+                if isinstance(assets, list):
+                        for asset in assets:
+                                self.ledgers[asset] = AssetLedger(asset)
+                elif isinstance(assets, str):
+                        self.ledgers[assets] = AssetLedger(assets)
+                else:
+                        raise ValueError(&#34;Invalid asset for initializing trading book - {}&#34;.format(assets))
+
+        def log_transaction(self, transaction):
+                if isinstance(transaction, Order) or isinstance(transaction, OrderUpdateEvent):
+                        self.ledgers[transaction.ticker].add_order(transaction)
+                elif isinstance(transaction, Trade):
+                        self.ledgers[transaction.ticker].add_trade(transaction)
+                else:
+                        raise ValueError(&#34;Invalid transaction&#34;)
+
+        def erase_transaction(self, transaction):
+                if isinstance(transaction, OrderUpdateEvent):
+                        if transaction.ticker:
+                                self.ledgers[transaction.ticker].remove_order(transaction)
+                        else:
+                                # Account for situation where order is rejected due unlucky
+                                # Only id is sent, no symbol tag
+                                for asset, ledger in self.ledgers.items():
+                                        if transaction in ledger:
+                                                self.ledgers[asset].remove_order(transaction)
+                elif isinstance(transaction, Trade):
+                        self.ledgers[transaction.ticker].remove_trade(transaction)
+                else:
+                        raise ValueError(&#34;Invalid transaction&#34;)
+
+        def update_transaction(self, transaction):
+                if isinstance(transaction, OrderUpdateEvent):
+                        self.ledgers[transaction.ticker].update_order(transaction)
+                else:
+                        raise ValueError(&#34;Invalid transaction&#34;)
+
+        def get_ledger(self, ticker=None):
+                if not ticker:
+                        return self.ledgers
+                else:
+                        try:
+                                return self.ledgers[ticker]
+                        except KeyError:
+                                print(&#34;No such ledger in trading book to retrieve - {}&#34;.format(ticker))
+
+        def clear_ledger(self, ticker):
+                try:
+                        del self.ledgers[ticker]
+                except KeyError:
+                        print(&#34;No such ledger in trading book to remove - {}&#34;.format(ticker))
+
+        def reset_ledgers(self):
+                self.ledgers.clear()
+
+        def get_book_trading_volume(self, ticker=None):
+                trade_vol = 0
+                try:
+                        if ticker is None:
+                                for ledger in self.ledgers.values():
+                                        trade_vol += ledger.calc_asset_trading_volume()
+                        else:
+                                trade_vol += (self.get_ledger(ticker).calc_asset_trading_volume())
+                except KeyError:
+                        print(&#34;No ledger for ticker {} to calculate trade volume&#34;.format(ticker))
+                else:
+                        return round(trade_vol, 2)
+                                
+        def get_book_pnl(self, ticker=None):
+                pnL = 0
+                try:
+                        if ticker is None:
+                                for ledger in self.ledgers.values():
+                                        pnL += ledger.calc_trading_pnl()
+                        else:
+                                pnL += (self.get_ledger(ticker).calc_trading_pnl())
+                except KeyError:
+                        print(&#34;No ledger for ticker {} to calculate PnL&#34;.format(ticker))
+                else:
+                        return round(pnL, 2)
+
+        def get_ledger_vwap(self, ticker=None):
+                ledger_vwap = {}
+                try:
+                        if ticker is None:
+                                for asset, ledger in self.ledgers.items():
+                                        ledger_vwap[asset] = round(ledger.calc_vwap(), 2)
+                        else:
+                                ledger_vwap[asset] = round(ledger.calc_vwap(), 2)
+                except KeyError:
+                        print(&#34;No ledger for ticker {} to calculate VWAP&#34;.format(ticker))
+                else:
+                        return ledger_vwap</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="app.user_sessions.demo_session.DemoTradingBook" href="../user_sessions/demo_session.html#app.user_sessions.demo_session.DemoTradingBook">DemoTradingBook</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="app.common.interface_order.TradingBook.clear_ledger"><code class="name flex">
+<span>def <span class="ident">clear_ledger</span></span>(<span>self, ticker)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.TradingBook.erase_transaction"><code class="name flex">
+<span>def <span class="ident">erase_transaction</span></span>(<span>self, transaction)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.TradingBook.get_book_pnl"><code class="name flex">
+<span>def <span class="ident">get_book_pnl</span></span>(<span>self, ticker=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.TradingBook.get_book_trading_volume"><code class="name flex">
+<span>def <span class="ident">get_book_trading_volume</span></span>(<span>self, ticker=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.TradingBook.get_ledger"><code class="name flex">
+<span>def <span class="ident">get_ledger</span></span>(<span>self, ticker=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.TradingBook.get_ledger_vwap"><code class="name flex">
+<span>def <span class="ident">get_ledger_vwap</span></span>(<span>self, ticker=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.TradingBook.log_transaction"><code class="name flex">
+<span>def <span class="ident">log_transaction</span></span>(<span>self, transaction)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.TradingBook.reset_ledgers"><code class="name flex">
+<span>def <span class="ident">reset_ledgers</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.common.interface_order.TradingBook.update_transaction"><code class="name flex">
+<span>def <span class="ident">update_transaction</span></span>(<span>self, transaction)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="app.common" href="index.html">app.common</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="app.common.interface_order.AssetLedger" href="#app.common.interface_order.AssetLedger">AssetLedger</a></code></h4>
+<ul class="">
+<li><code><a title="app.common.interface_order.AssetLedger.add_order" href="#app.common.interface_order.AssetLedger.add_order">add_order</a></code></li>
+<li><code><a title="app.common.interface_order.AssetLedger.add_trade" href="#app.common.interface_order.AssetLedger.add_trade">add_trade</a></code></li>
+<li><code><a title="app.common.interface_order.AssetLedger.calc_asset_trading_volume" href="#app.common.interface_order.AssetLedger.calc_asset_trading_volume">calc_asset_trading_volume</a></code></li>
+<li><code><a title="app.common.interface_order.AssetLedger.calc_trading_pnl" href="#app.common.interface_order.AssetLedger.calc_trading_pnl">calc_trading_pnl</a></code></li>
+<li><code><a title="app.common.interface_order.AssetLedger.calc_vwap" href="#app.common.interface_order.AssetLedger.calc_vwap">calc_vwap</a></code></li>
+<li><code><a title="app.common.interface_order.AssetLedger.clear_orders" href="#app.common.interface_order.AssetLedger.clear_orders">clear_orders</a></code></li>
+<li><code><a title="app.common.interface_order.AssetLedger.clear_trades" href="#app.common.interface_order.AssetLedger.clear_trades">clear_trades</a></code></li>
+<li><code><a title="app.common.interface_order.AssetLedger.get_order" href="#app.common.interface_order.AssetLedger.get_order">get_order</a></code></li>
+<li><code><a title="app.common.interface_order.AssetLedger.get_trade" href="#app.common.interface_order.AssetLedger.get_trade">get_trade</a></code></li>
+<li><code><a title="app.common.interface_order.AssetLedger.remove_order" href="#app.common.interface_order.AssetLedger.remove_order">remove_order</a></code></li>
+<li><code><a title="app.common.interface_order.AssetLedger.remove_trade" href="#app.common.interface_order.AssetLedger.remove_trade">remove_trade</a></code></li>
+<li><code><a title="app.common.interface_order.AssetLedger.update_order" href="#app.common.interface_order.AssetLedger.update_order">update_order</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="app.common.interface_order.Order" href="#app.common.interface_order.Order">Order</a></code></h4>
+<ul class="">
+<li><code><a title="app.common.interface_order.Order.to_fix_cancel" href="#app.common.interface_order.Order.to_fix_cancel">to_fix_cancel</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="app.common.interface_order.OrderUpdateEvent" href="#app.common.interface_order.OrderUpdateEvent">OrderUpdateEvent</a></code></h4>
+</li>
+<li>
+<h4><code><a title="app.common.interface_order.Trade" href="#app.common.interface_order.Trade">Trade</a></code></h4>
+</li>
+<li>
+<h4><code><a title="app.common.interface_order.TradingBook" href="#app.common.interface_order.TradingBook">TradingBook</a></code></h4>
+<ul class="">
+<li><code><a title="app.common.interface_order.TradingBook.clear_ledger" href="#app.common.interface_order.TradingBook.clear_ledger">clear_ledger</a></code></li>
+<li><code><a title="app.common.interface_order.TradingBook.erase_transaction" href="#app.common.interface_order.TradingBook.erase_transaction">erase_transaction</a></code></li>
+<li><code><a title="app.common.interface_order.TradingBook.get_book_pnl" href="#app.common.interface_order.TradingBook.get_book_pnl">get_book_pnl</a></code></li>
+<li><code><a title="app.common.interface_order.TradingBook.get_book_trading_volume" href="#app.common.interface_order.TradingBook.get_book_trading_volume">get_book_trading_volume</a></code></li>
+<li><code><a title="app.common.interface_order.TradingBook.get_ledger" href="#app.common.interface_order.TradingBook.get_ledger">get_ledger</a></code></li>
+<li><code><a title="app.common.interface_order.TradingBook.get_ledger_vwap" href="#app.common.interface_order.TradingBook.get_ledger_vwap">get_ledger_vwap</a></code></li>
+<li><code><a title="app.common.interface_order.TradingBook.log_transaction" href="#app.common.interface_order.TradingBook.log_transaction">log_transaction</a></code></li>
+<li><code><a title="app.common.interface_order.TradingBook.reset_ledgers" href="#app.common.interface_order.TradingBook.reset_ledgers">reset_ledgers</a></code></li>
+<li><code><a title="app.common.interface_order.TradingBook.update_transaction" href="#app.common.interface_order.TradingBook.update_transaction">update_transaction</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.0</a>.</p>
+</footer>
+</body>
+</html>

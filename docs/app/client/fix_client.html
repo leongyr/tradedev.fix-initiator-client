@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.0">
+<title>app.client.fix_client API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>app.client.fix_client</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="app.client.fix_client.FixClient"><code class="flex name class">
+<span>class <span class="ident">FixClient</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>FIX initiator client for connecting with the FIX server to send buy and cancel orders</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FixClient(fix.Application):
+        &#34;&#34;&#34;
+        FIX initiator client for connecting with the FIX server to send buy and cancel orders
+        &#34;&#34;&#34;
+
+        orderID = 0
+        curr_sess = None
+        app_event_callbacks = {&#34;add&#34;: None, &#34;remove&#34;: None, &#34;update&#34;: None}
+
+        _msg_typ_field = fix.MsgType().getField()                               # Tag 35 - fromApp
+        _ord_status_field = fix.OrdStatus().getField()                  # Tag 39 - fromApp
+        _symbol_field = fix.Symbol().getField()                                 # Tag 55 - _handle_exec_report
+        _side_field = fix.Side().getField()                                             # Tag 54 - _handle_exec_report
+        _qty_field = fix.OrderQty().getField()                                  # Tag 38 - _handle_exec_report
+        _last_filled_qty_field = fix.LastShares().getField()    # Tag 32 - _handle_exec_report
+        _id_field = fix.ClOrdID().getField()                                    # Tag 11 - _handle_exec_report
+        _price_field = fix.Price().getField()                                   # Tag 44 - _handle_exec_report
+        _last_filled_price_field = fix.LastPx().getField()              # Tag 31 - _handle_exec_report
+        _sending_time_field = fix.SendingTime().getField()              # Tag 52 - _handle_exec_report
+        _msg_field = fix.Text().getField()                                              # Tag 58 - _handle_reject/_handle_order_cancel_reject
+        _orig_clorid_field = fix.OrigClOrdID().getField()               # Tag 41 - _handle_order_cancel_reject
+        _transact_time_field = fix.TransactTime().getField()    # Tag 60 - sendNewOrder/cancelOrder
+        
+
+        def onCreate(self, sessionID):
+                return
+
+        def onLogon(self, sessionID):
+                self.curr_sess = sessionID
+                print(&#34;LOGON: {}&#34;.format(sessionID))
+                return
+
+        def onLogout(self, sessionID):
+                print(&#34;LOGOUT: {}&#34;.format(sessionID))
+                return
+
+        def toAdmin(self, message, sessionID):
+                return
+
+        def toApp(self, message, sessionID):
+                fix_str = unicode_fix(str(message))
+                print(&#34;TOAPP: {}&#34;.format(fix_str))
+                return
+
+        def fromAdmin(self, message, sessionID):
+                fix_str = unicode_fix(str(message))
+                print(&#34;ADMIN: {}&#34;.format(fix_str))
+                return
+
+        def fromApp(self, message, sessionID):
+                source = &#34;FROM APP&#34;
+                fix_str = unicode_fix(str(message))
+                print(&#34;{}: {}&#34;.format(source, fix_str))
+
+                msg_typ = message.getHeader().getField(self._msg_typ_field)
+
+                if msg_typ == fix.MsgType_ExecutionReport:
+                        ord_status = message.getField(self._ord_status_field)
+                        self._handle_exec_report(ord_status, fix_str, source)
+                elif msg_typ == fix.MsgType_Reject:
+                        self._handle_reject(fix_str, source)
+                elif msg_typ == fix.MsgType_OrderCancelReject:
+                        self._handle_order_cancel_reject(fix_str, source)
+                else:
+                        print(&#34;{}: Not Implemented (Msg Type) - {}&#34;.format(source, msg_typ))
+                        return NotImplemented
+                return
+
+
+        def _genOrderID(self):
+                self.orderID += 1
+                timestamp = dt.datetime.timestamp(dt.datetime.utcnow())
+                return str(self.orderID) + &#34;-&#34; + str(timestamp)
+
+
+        def _handle_exec_report(self, ord_status, msg, source):
+                # Handle execution reports from the FIX server
+                tags = extract_tag_value_pair_from(msg)
+
+                _id = tags.get(self._id_field, None)
+                _timestamp = tags.get(self._sending_time_field, None)
+                _ticker = tags.get(self._symbol_field, None)
+                _side = tags.get(self._side_field, None)
+                _qty = tags.get(self._last_filled_qty_field, 0)
+                _price = tags.get(self._last_filled_price_field, 0.0)
+
+                trade = Trade(_id, _timestamp, _ticker, _side, float(_qty), float(_price))
+                order_event = OrderUpdateEvent(ordId=_id, timestamp=_timestamp, qty=float(_qty), price=float(_price),
+                                                                           status=ord_status, ticker=_ticker, side=_side)
+
+                if ord_status == fix.OrdStatus_NEW:
+                        self.app_event_callbacks[&#34;update&#34;](order_event)
+                elif ord_status == fix.OrdStatus_PARTIALLY_FILLED:
+                        self.app_event_callbacks[&#34;add&#34;](trade)
+                        self.app_event_callbacks[&#34;update&#34;](order_event)
+                elif (ord_status == fix.OrdStatus_FILLED):
+                        self.app_event_callbacks[&#34;add&#34;](trade)
+                        self.app_event_callbacks[&#34;remove&#34;](order_event)
+                elif ord_status == fix.OrdStatus_REJECTED:
+                        self.app_event_callbacks[&#34;remove&#34;](order_event)
+                elif ord_status == fix.OrdStatus_CANCELED:
+                        self.app_event_callbacks[&#34;remove&#34;](order_event)
+                else:
+                        print(&#34;{}: Not Implemented (Order Status) - {}&#34;.format(source, ord_status))
+                        return NotImplemented
+
+        def _handle_reject(self, msg, source):
+                # Handle rejection reports from the FIX server
+                tags = extract_tag_value_pair_from(msg)
+                reject_msg = tags.get(self._msg_field, &#34;Nil&#34;)
+                print(&#34;{}: Reject - {}&#34;.format(source, reject_msg))
+
+
+        def _handle_order_cancel_reject(self, msg, source):
+                # Handle order cancel rejection reports from the FIX server
+                tags = extract_tag_value_pair_from(msg)
+                reject_msg = tags.get(self._msg_field, &#34;Nil&#34;)
+                reject_order = tags.get(self._orig_clorid_field, None)
+                print(&#34;{}: Order ({}) Cancel Rejected - {}&#34;.format(source, reject_order, reject_msg))
+
+
+        def _newMsg(self):
+                # Initialise a new FIX message
+                order_msg = fix.Message()
+                order_msg.getHeader().setField(fix.BeginString())
+                return order_msg
+
+
+        def sendNewOrder(self, order_req):
+                &#39;&#39;&#39;
+                Send Buy orders to the FIX server in the form of a FIX message
+                
+                Parameters
+                ===========
+                order_req: Order
+                        Order with the required information to send a valid Buy order to FIX server
+                &#39;&#39;&#39;
+                _ticker = order_req.ticker
+                _side = order_req.side
+                _order_type = order_req.ordtyp
+                _qty = order_req.qty
+                _security = order_req.security
+                _price = order_req.price
+
+                order_msg = self._newMsg()
+                order_msg.getHeader().setField(fix.MsgType(fix.MsgType_NewOrderSingle))
+
+                # Set content
+                new_id = self._genOrderID()
+                order_req.id = new_id
+                order_msg.setField(fix.ClOrdID(new_id))
+                order_msg.setField(fix.TimeInForce(fix.TimeInForce_GOOD_TILL_CANCEL))
+                order_msg.setField(fix.SecurityType(_security))
+                order_msg.setField(fix.Symbol(_ticker))
+                order_msg.setField(fix.Side(_side))
+                order_msg.setField(fix.OrdType(_order_type))
+                order_msg.setField(fix.Price(_price))
+                order_msg.setField(fix.OrderQty(_qty))
+                order_msg.setField(fix.HandlInst(fix.HandlInst_AUTOMATED_EXECUTION_ORDER_PRIVATE_NO_BROKER_INTERVENTION))
+                order_msg.setField(fix.StringField(self._transact_time_field,(dt.datetime.utcnow().strftime(&#34;%Y%m%d-%H:%M:%S.%f&#34;))[:-3]))
+
+                try:
+                        fix.Session.sendToTarget(order_msg, self.curr_sess)
+                        self.app_event_callbacks[&#34;add&#34;](order_req)
+                except fix.SessionNotFound as e:
+                        return
+
+
+        def cancelOrder(self, fix_repr):
+                &#39;&#39;&#39;
+                Send Cancel orders to the FIX server in the form of a FIX message
+                
+                Parameters
+                ===========
+                fix_repr: dict
+                        Dictionary with the required tags for sending a Cancel order to FIX server
+                &#39;&#39;&#39;
+                order_msg = self._newMsg()
+                order_msg.getHeader().setField(fix.MsgType(fix.MsgType_OrderCancelRequest))
+
+                order_msg.setField( fix.ClOrdID( self._genOrderID() ) )
+                for tag, value in fix_repr.items():
+                        order_msg.setField(fix.StringField(int(tag), str(value)))
+                order_msg.setField(fix.StringField(self._transact_time_field,(dt.datetime.utcnow().strftime(&#34;%Y%m%d-%H:%M:%S.%f&#34;))[:-3]))
+
+                try:
+                        fix.Session.sendToTarget(order_msg, self.curr_sess)
+                except fix.SessionNotFound as e:
+                        return
+
+
+        def register_app_event_callback(self, methods):
+                &#34;&#34;&#34;
+                Registers the necessary callbacks to add, remove and update ledgers
+                within the trading book
+
+                Parameters
+                ===========
+                methods: dict
+                        Contains the necessary callback functions for the client upon receiving order
+                        updates from the FIX server
+                &#34;&#34;&#34;
+                if isinstance(methods, dict):
+                        try:
+                                for label, method in methods.items(): 
+                                        self.app_event_callbacks[label] = method
+                        except KeyError:
+                                print(&#34;Valid keys are &#39;add&#39;, &#39;remove&#39; and &#39;update&#39;&#34;)
+                else:
+                        raise ValueError(&#34;Callback inputs should be a dictionary&#34;)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>quickfix.Application</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="app.client.fix_client.FixClient.app_event_callbacks"><code class="name">var <span class="ident">app_event_callbacks</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.client.fix_client.FixClient.curr_sess"><code class="name">var <span class="ident">curr_sess</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.client.fix_client.FixClient.orderID"><code class="name">var <span class="ident">orderID</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="app.client.fix_client.FixClient.cancelOrder"><code class="name flex">
+<span>def <span class="ident">cancelOrder</span></span>(<span>self, fix_repr)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send Cancel orders to the FIX server in the form of a FIX message</p>
+<h1 id="parameters">Parameters</h1>
+<p>fix_repr: dict
+Dictionary with the required tags for sending a Cancel order to FIX server</p></div>
+</dd>
+<dt id="app.client.fix_client.FixClient.fromAdmin"><code class="name flex">
+<span>def <span class="ident">fromAdmin</span></span>(<span>self, message, sessionID)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.client.fix_client.FixClient.fromApp"><code class="name flex">
+<span>def <span class="ident">fromApp</span></span>(<span>self, message, sessionID)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.client.fix_client.FixClient.onCreate"><code class="name flex">
+<span>def <span class="ident">onCreate</span></span>(<span>self, sessionID)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.client.fix_client.FixClient.onLogon"><code class="name flex">
+<span>def <span class="ident">onLogon</span></span>(<span>self, sessionID)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.client.fix_client.FixClient.onLogout"><code class="name flex">
+<span>def <span class="ident">onLogout</span></span>(<span>self, sessionID)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.client.fix_client.FixClient.register_app_event_callback"><code class="name flex">
+<span>def <span class="ident">register_app_event_callback</span></span>(<span>self, methods)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Registers the necessary callbacks to add, remove and update ledgers
+within the trading book</p>
+<h1 id="parameters">Parameters</h1>
+<p>methods: dict
+Contains the necessary callback functions for the client upon receiving order
+updates from the FIX server</p></div>
+</dd>
+<dt id="app.client.fix_client.FixClient.sendNewOrder"><code class="name flex">
+<span>def <span class="ident">sendNewOrder</span></span>(<span>self, order_req)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send Buy orders to the FIX server in the form of a FIX message</p>
+<h1 id="parameters">Parameters</h1>
+<p>order_req: Order
+Order with the required information to send a valid Buy order to FIX server</p></div>
+</dd>
+<dt id="app.client.fix_client.FixClient.toAdmin"><code class="name flex">
+<span>def <span class="ident">toAdmin</span></span>(<span>self, message, sessionID)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="app.client.fix_client.FixClient.toApp"><code class="name flex">
+<span>def <span class="ident">toApp</span></span>(<span>self, message, sessionID)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="app.client" href="index.html">app.client</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="app.client.fix_client.FixClient" href="#app.client.fix_client.FixClient">FixClient</a></code></h4>
+<ul class="">
+<li><code><a title="app.client.fix_client.FixClient.app_event_callbacks" href="#app.client.fix_client.FixClient.app_event_callbacks">app_event_callbacks</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.cancelOrder" href="#app.client.fix_client.FixClient.cancelOrder">cancelOrder</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.curr_sess" href="#app.client.fix_client.FixClient.curr_sess">curr_sess</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.fromAdmin" href="#app.client.fix_client.FixClient.fromAdmin">fromAdmin</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.fromApp" href="#app.client.fix_client.FixClient.fromApp">fromApp</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.onCreate" href="#app.client.fix_client.FixClient.onCreate">onCreate</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.onLogon" href="#app.client.fix_client.FixClient.onLogon">onLogon</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.onLogout" href="#app.client.fix_client.FixClient.onLogout">onLogout</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.orderID" href="#app.client.fix_client.FixClient.orderID">orderID</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.register_app_event_callback" href="#app.client.fix_client.FixClient.register_app_event_callback">register_app_event_callback</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.sendNewOrder" href="#app.client.fix_client.FixClient.sendNewOrder">sendNewOrder</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.toAdmin" href="#app.client.fix_client.FixClient.toAdmin">toAdmin</a></code></li>
+<li><code><a title="app.client.fix_client.FixClient.toApp" href="#app.client.fix_client.FixClient.toApp">toApp</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.0</a>.</p>
+</footer>
+</body>
+</html>

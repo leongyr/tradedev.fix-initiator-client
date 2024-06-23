@@ -47,11 +47,17 @@ class DemoTradingBook(TradingBook):
 
 
 class DemoSession(_BaseSession):
+	"""
+	Demo session for sending buy and cancel orders to FIX server
+	"""
 	def __init__(self, args):
 		super().__init__(args)
 		self.tickers = ["MSFT", "AAPL", "BAC"]
 
 	def start(self):
+		"""
+		Start the demo session
+		"""
 		demo_account = DemoTradingBook("fix-demo", self.tickers)
 		callback_methods = {"add": demo_account.log_transaction,
 							"remove": demo_account.erase_transaction,
