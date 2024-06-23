@@ -6,6 +6,9 @@ from app.utils.tools import (unicode_fix, extract_tag_value_pair_from)
 from app.common.interface_order import (OrderUpdateEvent, Trade)
 
 class FixClient(fix.Application):
+	"""
+	FIX initiator client for connecting with the FIX server to send buy and cancel orders
+	"""
 
 	orderID = 0
 	curr_sess = None
@@ -78,6 +81,7 @@ class FixClient(fix.Application):
 
 
 	def _handle_exec_report(self, ord_status, msg, source):
+		# Handle execution reports from the FIX server
 		tags = extract_tag_value_pair_from(msg)
 
 		_id = tags.get(self._id_field, None)
@@ -90,14 +94,6 @@ class FixClient(fix.Application):
 		trade = Trade(_id, _timestamp, _ticker, _side, float(_qty), float(_price))
 		order_event = OrderUpdateEvent(ordId=_id, timestamp=_timestamp, qty=float(_qty), price=float(_price),
 									   status=ord_status, ticker=_ticker, side=_side)
-
-		# _timestamp = msg.getHeader().getField(self._sending_time_field)
-		# _ticker = msg.getField(self._symbol_field)
-		# _side = msg.getField(self._side_field)
-		# _qty = msg.getField(self._qty_field) if ord_status == fix.OrdStatus_NEW else \
-		# 			(0 if ord_status == fix.OrdStatus_CANCELED else msg.getField(self._last_filled_qty_field))
-		# _price = (msg.getField(self._last_filled_price_field), msg.getField(self._price_field)) \
-		# 			[(ord_status == fix.OrdStatus_NEW) or (ord_status == fix.OrdStatus_CANCELED)]
 
 		if ord_status == fix.OrdStatus_NEW:
 			self.app_event_callbacks["update"](order_event)
@@ -116,12 +112,14 @@ class FixClient(fix.Application):
 			return NotImplemented
 
 	def _handle_reject(self, msg, source):
+		# Handle rejection reports from the FIX server
 		tags = extract_tag_value_pair_from(msg)
 		reject_msg = tags.get(self._msg_field, "Nil")
 		print("{}: Reject - {}".format(source, reject_msg))
 
 
 	def _handle_order_cancel_reject(self, msg, source):
+		# Handle order cancel rejection reports from the FIX server
 		tags = extract_tag_value_pair_from(msg)
 		reject_msg = tags.get(self._msg_field, "Nil")
 		reject_order = tags.get(self._orig_clorid_field, None)
@@ -137,11 +135,12 @@ class FixClient(fix.Application):
 
 	def sendNewOrder(self, order_req):
 		'''
-		Convert to FIX protocol format before sending to server
-
-		Required parameters:
-		ClOrdID, TimeInForce, SecurityType, Symbol, Side, OrdType
-		Price, OrderQty, HandlInst, SendingTime
+		Send Buy orders to the FIX server in the form of a FIX message
+		
+		Parameters
+		===========
+		order_req: Order
+			Order with the required information to send a valid Buy order to FIX server
 		'''
 		_ticker = order_req.ticker
 		_side = order_req.side
@@ -175,6 +174,14 @@ class FixClient(fix.Application):
 
 
 	def cancelOrder(self, fix_repr):
+		'''
+		Send Cancel orders to the FIX server in the form of a FIX message
+		
+		Parameters
+		===========
+		fix_repr: dict
+			Dictionary with the required tags for sending a Cancel order to FIX server
+		'''
 		order_msg = self._newMsg()
 		order_msg.getHeader().setField(fix.MsgType(fix.MsgType_OrderCancelRequest))
 
@@ -190,6 +197,16 @@ class FixClient(fix.Application):
 
 
 	def register_app_event_callback(self, methods):
+		"""
+		Registers the necessary callbacks to add, remove and update ledgers
+		within the trading book
+
+		Parameters
+		===========
+		methods: dict
+			Contains the necessary callback functions for the client upon receiving order
+			updates from the FIX server
+		"""
 		if isinstance(methods, dict):
 			try:
 				for label, method in methods.items(): 
